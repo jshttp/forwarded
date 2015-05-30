@@ -14,7 +14,7 @@
   "repository": "jshttp/forwarded",
   "devDependencies": {
     "istanbul": "0.3.2",
-    "mocha": "~1.21.4"
+    "mocha": "1.21.5"
   },
   "files": [
     "LICENSE",
