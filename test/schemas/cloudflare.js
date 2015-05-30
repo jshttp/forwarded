@@ -20,17 +20,37 @@ describe('cloudflare', function () {
     assert.deepEqual(result.addrs, ['127.0.0.1', '10.10.10.1'])
   })
 
-  it('should parse [cf-visitor]', function () {
-    var req = request({
-      'cf-visitor': '{"scheme": "https"}'
+  describe('should parse [cf-visitor]', function () {
+    it('{"scheme": "https"}', function () {
+      var req = request({
+        'cf-visitor': '{"scheme": "https"}'
+      })
+
+      assert.ok(schemas.cloudflare.proto(req))
     })
 
-    assert.ok(schemas.cloudflare.proto(req))
+    it('{"scheme": "http"}', function () {
+      var req = request({
+        'cf-visitor': '{"scheme": "http"}'
+      })
 
-    req = request({
-      'cf-visitor': '{malformed}'
+      assert.ok(!schemas.cloudflare.proto(req))
     })
 
-    assert.ok(!schemas.cloudflare.proto(req))
+    it('{}', function () {
+      var req = request({
+        'cf-visitor': '{}'
+      })
+
+      assert.ok(!schemas.cloudflare.proto(req))
+    })
+
+    it('{}', function () {
+      var req = request({
+        'cf-visitor': '{malformed}'
+      })
+
+      assert.ok(!schemas.cloudflare.proto(req))
+    })
   })
 })
