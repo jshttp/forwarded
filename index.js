@@ -8,6 +8,7 @@
 
 /**
  * Module exports.
+ * @public
  */
 
 module.exports = forwarded
@@ -15,8 +16,9 @@ module.exports = forwarded
 /**
  * Get all addresses in the request, using the `X-Forwarded-For` header.
  *
- * @param {Object} req
- * @api public
+ * @param {object} req
+ * @return {array}
+ * @public
  */
 
 function forwarded(req) {
