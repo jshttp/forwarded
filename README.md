@@ -6,7 +6,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-Parse *Forwarded* HTTP headers, using the standard: [RFC 7239](https://tools.ietf.org/html/rfc7239) *(Forwarded HTTP Extension)*, as well as commonly used none-standard headers: *e.g. `X-Forwarded-*`, `X-Real-*`, etc ...*
+Parse *Forwarded* HTTP headers, using the standard: [RFC 7239](https://tools.ietf.org/html/rfc7239) *(Forwarded HTTP Extension)*, as well as commonly used none-standard headers (e.g. `X-Forwarded-*`, `X-Real-*`, etc ...)
 
 review [`schemas` folder](lib/schemas) for a full list of supported headers schemas.
 
