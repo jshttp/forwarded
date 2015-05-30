@@ -34,5 +34,11 @@ describe('fastly', function () {
     })
 
     assert.ok(schemas.fastly.proto(req))
+
+    req = request({
+      'fastly-ssl': undefined
+    })
+
+    assert.ok(!schemas.fastly.proto(req))
   })
 })
