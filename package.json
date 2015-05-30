@@ -37,7 +37,7 @@
   ],
   "repository": "jshttp/forwarded",
   "devDependencies": {
-    "debug": "^2.2.0",
+    "debug": "~2.2.0",
     "istanbul": "0.3.14",
     "mocha": "~2.2.5"
   },
