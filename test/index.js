@@ -8,7 +8,17 @@ var request = require('./helper')
 
 describe('forwarded(req)', function () {
   it('should require http.IncomingMessage', function () {
-    assert.throws(forwarded.bind(null), 'argument req is required')
+    assert.throws(forwarded.bind(null), TypeError)
+  })
+
+  it('should fail with invalid schemas', function () {
+    var options = {
+      schemas: [
+        'XFFFF'
+      ]
+    }
+
+    assert.throws(function () { forwarded(request(), options) }, Error)
   })
 
   it('should get defaults', function () {
@@ -42,7 +52,6 @@ describe('forwarded(req)', function () {
   it('should process all schemas in ordered sequence', function () {
     var options = {
       schemas: [
-        'fakeschema',
         'cloudflare',
         'fastly',
         'microsoft',

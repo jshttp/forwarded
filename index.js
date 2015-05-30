@@ -54,13 +54,17 @@ module.exports = function forwarded (req, options) {
 
   return opts.schemas
     // check if schemas exist
-    .filter(function (name) {
+    .map(function (name) {
+      if (!schemas[name]) {
+        throw new Error('invalid schema')
+      }
+
       return schemas[name]
     })
 
     // process schemas
-    .reduce(function (forwarded, name) {
-      var result = new Processor(req, schemas[name])
+    .reduce(function (forwarded, schema) {
+      var result = new Processor(req, schema)
 
       // update forwarded object
       return {
