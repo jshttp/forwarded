@@ -2,7 +2,6 @@
 
 var Processor = require('./lib/processor')
 var schemas = require('./lib/schemas')
-var util = require('util')
 
 /**
  * Get all addresses in the request, using the `X-Forwarded-For` header.
@@ -12,14 +11,16 @@ var util = require('util')
  */
 
 module.exports = function forwarded (req, options) {
-  var opts = util._extend({
+  options = options || {}
+
+  var opts = {
     // default to only common + standard
     // array order matters here
-    schemas: [
+    schemas: options.schemas || [
       'xff',
       'rfc7239'
     ]
-  }, options)
+  }
 
   // consistent case
   opts.schemas.map(Function.prototype.call, String.prototype.toLowerCase)
