@@ -71,6 +71,11 @@ module.exports = function forwarded (req, options) {
     .reduce(function (forwarded, schema) {
       var result = new Processor(req, schema)
 
+      // ensure reverse order of addresses
+      if (result.addrs) {
+        result.addrs.reverse()
+      }
+
       // update forwarded object
       return {
         addrs: forwarded.addrs.concat(result.addrs).filter(Boolean),

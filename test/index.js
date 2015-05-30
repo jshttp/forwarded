@@ -65,7 +65,7 @@ describe('forwarded(req)', function () {
 
   it('should skip blank entries', function () {
     var result = forwarded(request({
-      'x-forwarded-for': '10.0.0.2,, 10.0.0.1'
+      'forwarded': 'for=10.0.0.2,for,for=,for=10.0.0.1'
     }))
 
     assert.deepEqual(result.addrs, ['127.0.0.1', '10.0.0.1', '10.0.0.2'])

@@ -24,7 +24,7 @@ describe('rfc7239', function () {
     })
 
     assert.deepEqual(forwarded(req, options), {
-      addrs: ['127.0.0.1', '0.0.0.1', '0.0.0.2', 'private', '1::8'],
+      addrs: ['127.0.0.1', '1::8', 'private', '0.0.0.2', '0.0.0.1'],
       by: '0.0.0.3',
       port: '9000',
       ports: ['5000', '9000'],
