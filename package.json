@@ -1,33 +1,59 @@
 {
   "name": "forwarded",
   "description": "Parse HTTP X-Forwarded-For header",
-  "version": "0.1.0",
+  "version": "1.0.0-rc.1",
   "contributors": [
+    "Ahmad Nassri <ahmad@ahmadnassri.com>",
     "Douglas Christopher Wilson <doug@somethingdoug.com>"
   ],
   "license": "MIT",
   "keywords": [
-    "x-forwarded-for",
+    "cf-connecting-ip",
+    "cf-visitor",
+    "fastly-client-ip",
+    "fastly-client-port",
+    "fastly-ssl",
+    "forwarded",
+    "front-end-https",
     "http",
-    "req"
+    "https",
+    "protocol",
+    "x-cluster-client-ip",
+    "x-forwarded-for",
+    "x-forwarded-host",
+    "x-forwarded-port",
+    "x-forwarded-proto",
+    "x-forwarded-protocol",
+    "x-forwarded-ssl",
+    "x-real-ip",
+    "x-real-port",
+    "x-real-proto",
+    "x-url-scheme",
+    "z-forwarded-for",
+    "z-forwarded-host",
+    "z-forwarded-port",
+    "z-forwarded-proto",
+    "z-forwarded-protocol"
   ],
   "repository": "jshttp/forwarded",
   "devDependencies": {
-    "istanbul": "0.3.2",
-    "mocha": "~1.21.4"
+    "debug": "^2.2.0",
+    "istanbul": "0.3.14",
+    "mocha": "~2.2.5"
   },
   "files": [
     "LICENSE",
     "HISTORY.md",
     "README.md",
-    "index.js"
+    "index.js",
+    "lib"
   ],
   "engines": {
     "node": ">= 0.6"
   },
   "scripts": {
-    "test": "mocha --reporter spec --bail --check-leaks test/",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
+    "test": "mocha --recursive --reporter spec --bail --check-leaks test/",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --recursive --reporter dot --check-leaks test/",
     "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
   }
 }

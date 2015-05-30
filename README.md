@@ -6,7 +6,9 @@
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-Parse HTTP X-Forwarded-For header
+Parse *Forwarded* HTTP headers, using the standard: [RFC 7239](https://tools.ietf.org/html/rfc7239) *(Forwarded HTTP Extension)*, as well as commonly used none-standard headers: *e.g. `X-Forwarded-*`, `X-Real-*`, etc ...*
+
+review [`schemas` folder](lib/schemas) for a full list of supported headers schemas.
 
 ## Installation
 
@@ -20,22 +22,47 @@ $ npm install forwarded
 var forwarded = require('forwarded')
 ```
 
-### forwarded(req)
+### forwarded(req[, options])
+
+returns an object who's properties represent [RFC 7239 Parameters (Section 5)](http://tools.ietf.org/html/rfc7239#section-5)
 
 ```js
-var addresses = forwarded(req)
+var result = forwarded(req)
 ```
 
-Parse the `X-Forwarded-For` header from the request. Returns an array
-of the addresses, including the socket address for the `req`. In reverse
-order (i.e. index `0` is the socket address and the last index is the
-furthest address, typically the end-user).
+#### options
+
+| name      | type    | description                               | required | default              |
+| --------- | ------- | ----------------------------------------- | -------- | -------------------- |
+| `schemas` | `array` | ordered list of header schemas to process | no       | `['xff', 'rfc7239']` |
+
+Parse appropriate headers from the request matching the selected [schemas](#options).
+
+### returned object
+
+| name      | type      | description                                                                              | default                                |
+| --------- | --------- | ---------------------------------------------------------------------------------------- | -------------------------------------- |
+| `for`     | `array`   | alias of `addrs`                                                                                                                  |
+| `by`      | `string`  | [RFC 7239 Section 5.1](http://tools.ietf.org/html/rfc7239#section-5.1) compatible result | `null`                                 |
+| `addrs`   | `array`   | [RFC 7239 Section 5.2](http://tools.ietf.org/html/rfc7239#section-5.2) compatible result | `[request.connection.remoteAddress]`   |
+| `host`    | `string`  | [RFC 7239 Section 5.3](http://tools.ietf.org/html/rfc7239#section-5.3) compatible result | `request.headers.host`                 |
+| `proto`   | `string`  | [RFC 7239 Section 5.4](http://tools.ietf.org/html/rfc7239#section-5.4) compatible result | `request.connection.encrypted`         |
+| `port`    | `string`  | the last known port used by the client/proxy in chain of proxies                         | `request.connection.remotePort`        |
+| `ports`   | `array`   | ordered list of known ports in the chain of proxies                                      | `[request.connection.remotePort]`      |
+
+###### Notes
+
+- `forwarded().addrs` & `forwarded().ports`: return arrays of the addresses & ports respectively, including the socket address/port for the request. In reverse order (i.e. index `0` is the socket address/port and the last index is the furthest address/port, typically the end-user).
 
 ## Testing
 
 ```sh
 $ npm test
 ```
+
+## TODO
+- [ ] process [`Via`](http://tools.ietf.org/html/rfc7230#section-5.7.1) header
+- [ ] extract ports from [`Forwarded`](http://tools.ietf.org/html/rfc7239#section-5.2) header: `Forwarded: for=x.x.x.x:yyyy`
 
 ## License
 
