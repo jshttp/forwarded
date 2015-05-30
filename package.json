@@ -38,8 +38,8 @@
   "repository": "jshttp/forwarded",
   "devDependencies": {
     "debug": "~2.2.0",
-    "istanbul": "0.3.14",
-    "mocha": "~2.2.5"
+    "istanbul": "0.3.9",
+    "mocha": "~1.21.5"
   },
   "files": [
     "LICENSE",
@@ -54,6 +54,6 @@
   "scripts": {
     "test": "mocha --recursive --reporter spec --bail --check-leaks test/",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --recursive --reporter dot --check-leaks test/",
-    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --recursive --reporter spec --check-leaks test/"
   }
 }
