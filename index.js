@@ -1,3 +1,13 @@
+/*!
+ * forwarded
+ * Copyright(c) 2014 Douglas Christopher Wilson
+ * MIT Licensed
+*/
+
+/**
+ * Module exports.
+ */
+
 'use strict'
 
 var Processor = require('./lib/processor')
