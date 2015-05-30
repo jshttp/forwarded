@@ -4,11 +4,12 @@
  * MIT Licensed
 */
 
+'use strict'
+
 /**
  * Module exports.
+ * @public
  */
-
-'use strict'
 
 var Processor = require('./lib/processor')
 var schemas = require('./lib/schemas')
@@ -17,7 +18,8 @@ var schemas = require('./lib/schemas')
  * Get all addresses in the request, using the `X-Forwarded-For` header.
  *
  * @param {http.IncomingMessage} req
- * @api public
+ * @return {object}
+ * @public
  */
 
 module.exports = function forwarded (req, options) {
