@@ -36,8 +36,10 @@
     "z-forwarded-protocol"
   ],
   "repository": "jshttp/forwarded",
+  "dependencies": {
+    "debug": "~2.2.0"
+  },
   "devDependencies": {
-    "debug": "~2.2.0",
     "istanbul": "0.3.9",
     "mocha": "~1.21.5"
   },
