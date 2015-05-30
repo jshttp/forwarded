@@ -33,7 +33,7 @@ module.exports = function forwarded (req, options) {
   }
 
   // consistent case
-  opts.schemas.map(Function.prototype.call, String.prototype.toLowerCase)
+  opts.schemas = opts.schemas.map(Function.prototype.call, String.prototype.toLowerCase)
 
   if (!req) {
     throw new TypeError('argument req is required')

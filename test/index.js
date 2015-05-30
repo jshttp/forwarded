@@ -21,6 +21,20 @@ describe('forwarded(req)', function () {
     assert.throws(function () { forwarded(request(), options) }, Error)
   })
 
+  it('should convert schema names to lowercase', function () {
+    var options = {
+      schemas: [
+        'XFF'
+      ]
+    }
+
+    var result = forwarded(request({
+      'x-forwarded-for': '10.0.0.1'
+    }), options)
+
+    assert.deepEqual(result.addrs, ['127.0.0.1', '10.0.0.1'])
+  })
+
   it('should get defaults', function () {
     var result = forwarded(request({
       'host': 'mockbin.com'
