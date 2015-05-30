@@ -21,6 +21,14 @@ describe('forwarded(req)', function () {
     assert.throws(function () { forwarded(request(), options) }, Error)
   })
 
+  it('should not throw an error on a disconnected socket connection', function () {
+    var req = request({}, {
+      remoteAddress: '127.0.0.1'
+    })
+
+    assert.doesNotThrow(function () { forwarded(req) }, Error)
+  })
+
   it('should convert schema names to lowercase', function () {
     var options = {
       schemas: [

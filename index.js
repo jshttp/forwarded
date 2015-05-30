@@ -44,9 +44,14 @@ module.exports = function forwarded (req, options) {
     addrs: [req.connection.remoteAddress],
     by: null,
     host: req.headers && req.headers.host ? req.headers.host : undefined,
-    port: req.connection.remotePort.toString(),
-    ports: [req.connection.remotePort.toString()],
+    port: req.connection.remotePort ? req.connection.remotePort.toString() : undefined,
+    ports: [],
     proto: req.connection.encrypted ? 'https' : 'http'
+  }
+
+  // add default port to ports array if present
+  if (forwarded.port) {
+    forwarded.ports.push(forwarded.port)
   }
 
   // alias "for" to keep with RFC7239 naming
