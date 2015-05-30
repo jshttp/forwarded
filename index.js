@@ -27,7 +27,6 @@ module.exports = function forwarded (req, options) {
     // default to only common + standard
     // array order matters here
     schemas: options.schemas || [
-      'xff',
       'rfc7239'
     ]
   }
