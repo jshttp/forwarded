@@ -1,6 +1,7 @@
 /*!
  * forwarded
  * Copyright(c) 2014 Douglas Christopher Wilson
+ * Copyright(c) 2015 Ahmad Nassri
  * MIT Licensed
 */
 

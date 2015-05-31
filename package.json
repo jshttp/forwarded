@@ -3,7 +3,7 @@
   "description": "Parse HTTP X-Forwarded-For header",
   "version": "1.0.0-rc.1",
   "contributors": [
-    "Ahmad Nassri <ahmad@ahmadnassri.com>",
+    "Ahmad Nassri <ahmad@ahmadnassri.com> (https://www.ahmadnassri.com)",
     "Douglas Christopher Wilson <doug@somethingdoug.com>"
   ],
   "license": "MIT",
