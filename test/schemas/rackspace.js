@@ -4,7 +4,7 @@
 
 var assert = require('assert')
 var forwarded = require('../..')
-var request = require('../helper')
+var request = require('../helpers').createRequestMock
 
 var options = {
   schemas: ['rackspace']

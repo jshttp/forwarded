@@ -4,7 +4,7 @@
 
 var assert = require('assert')
 var forwarded = require('..')
-var request = require('./helper')
+var request = require('./helpers').createRequestMock
 
 describe('forwarded(req)', function () {
   it('should require http.IncomingMessage', function () {

@@ -3,7 +3,7 @@
 'use strict'
 
 var assert = require('assert')
-var request = require('../helper')
+var request = require('../helpers').createRequestMock
 var schemas = require('../../lib/schemas')
 
 describe('microsoft', function () {
