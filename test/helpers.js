@@ -24,6 +24,7 @@ exports.createRequest = function (headers, done) {
     }
 
     http.get(options, function (res) {
+
       var body = ''
 
       res.on('data', function (chunk) {
@@ -31,7 +32,9 @@ exports.createRequest = function (headers, done) {
       })
 
       res.on('end', function () {
-        server.close(function () {
+        server.close()
+
+        server.on('close', function () {
           done(JSON.parse(body))
         })
       })
