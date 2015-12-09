@@ -32,6 +32,7 @@ function forwarded(req) {
     .filter(Boolean)
     .reverse()
   var socketAddr = req.connection.remoteAddress
+  if (!socketAddr) return proxyAddrs;
   var addrs = [socketAddr].concat(proxyAddrs)
 
   // return all addresses
