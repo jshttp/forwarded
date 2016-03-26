@@ -27,10 +27,10 @@ module.exports = function forwarded (req, options) {
   options = options || {}
 
   var opts = {
-    // default to only common + standard
-    // array order matters here
+    // default to only standard and x-forwarded for backward compatibility
     schemas: options.schemas || [
-      'rfc7239'
+      'rfc7239',
+      'x-forwarded'
     ]
   }
 
@@ -74,8 +74,11 @@ module.exports = function forwarded (req, options) {
       var result = processor(req.headers, schema)
 
       // ensure reverse order of addresses
-      if (result.addrs) {
-        result.addrs.reverse()
+      if (typeof result.addrs === 'string') {
+        result.addrs = result.addrs
+          .split(/ *, */)
+          .filter(Boolean)
+          .reverse()
       }
 
       // update forwarded object
