@@ -32,11 +32,25 @@ var result = forwarded(req)
 
 #### options
 
-| name      | type    | description                               | required | default              |
-| --------- | ------- | ----------------------------------------- | -------- | -------------------- |
-| `schemas` | `array` | ordered list of header schemas to process | no       | `['xff', 'rfc7239']` |
+| name      | type    | description                               | required | default                      |
+| --------- | ------- | ----------------------------------------- | -------- | ---------------------------- |
+| `schemas` | `array` | ordered list of header schemas to process | no       | `['rfc7239', 'x-forwarded']` |
 
 Parse appropriate headers from the request matching the selected [schemas](#options).
+
+###### available schemas
+
+| name                | key           | description                                                                               |
+| ------------------- | ------------- | ----------------------------------------------------------------------------------------- |
+| RFC 7239            | `rfc7239`     | [RFC 7239 Standard][rfc7239]                                                              |
+| X-Forwarded-*       | `x-forwarded` | Headers using the prefix [`X-Forwarded-*`][x-forwarded], a de facto standard              |
+| X-Real-*            | `x-real`      | Headers using the prefix [`X-Real-*`][x-real], mostly common in NGINX servers             |
+| Z-Forwarded-*       | `z-forwarded` | less common version of `X-Forwarded-*` used by [Z Scaler][z-forwarded]                    |
+| X-Cluster-Client-IP | `x-cluster`   | used by [Rackspace][x-cluster], X-Ray servers                                             |
+| Cloudflare          | `cloudflare`  | Headers used by [Cloudflare][cloudflare]                                                  |
+| Fastly              | `fastly`      | Headers used by Fastly, for [IP][fastly-ip], Port, and [SSL][fastly-ssl] info             |
+| Microsoft           | `microsoft`   | Non-standard header field used by [Microsoft][microsoft] applications and load-balancers  |
+| Weblogic            | `weblogic`    | Forwarded IP by Oracle's [Weblogic][weblogic] Proxy                                       |
 
 ### returned object
 
@@ -61,7 +75,7 @@ $ npm test
 ```
 
 ## TODO
-- [ ] process [`Via`](http://tools.ietf.org/html/rfc7230#section-5.7.1) header
+
 - [ ] extract ports from [`Forwarded`](http://tools.ietf.org/html/rfc7239#section-5.2) header: `Forwarded: for=x.x.x.x:yyyy`
 
 ## License
@@ -78,3 +92,13 @@ $ npm test
 [coveralls-url]: https://coveralls.io/r/jshttp/forwarded?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/forwarded.svg
 [downloads-url]: https://npmjs.org/package/forwarded
+[rfc7239]: https://tools.ietf.org/html/rfc7239
+[x-forwarded]: https://en.wikipedia.org/wiki/X-Forwarded-For
+[z-forwarded]: https://en.wikipedia.org/wiki/X-Forwarded-For#Proxy_servers_and_caching_engines
+[x-real]: http://nginx.org/en/docs/http/ngx_http_realip_module.html
+[x-cluster]: https://support.rackspace.com/how-to/controlling-access-to-linux-cloud-sites-based-on-the-client-ip-address/
+[cloudflare]: https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-CloudFlare-handle-HTTP-Request-headers-
+[fastly-ssl]: https://docs.fastly.com/guides/securing-communications/tls-termination
+[fastly-ip]: https://docs.fastly.com/guides/basic-configuration/adding-or-modifying-headers-on-http-requests-and-responses
+[weblogic]: https://blogs.oracle.com/wlscoherence/entry/obtaining_the_correct_client_ip
+[microsoft]: http://technet.microsoft.com/en-us/library/aa997519(v=exchg.65).aspx
