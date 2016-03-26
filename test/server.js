@@ -19,7 +19,7 @@ describe('live server', function () {
   it('should get defaults', function (done) {
     var headers = {
       'host': 'mockbin.com',
-      'forwarded': 'host= mockbin.com, for=0.0.0.1, for=0.0.0.2, for=private, for=1::8, for=; port= 9000; proto=https; by=0.0.0.3'
+      'forwarded': 'host=mockbin.com; for=0.0.0.1, for=0.0.0.2, for=private, for="1::8"; port=9000; proto=https; by=0.0.0.3'
     }
 
     request(headers, function (result) {

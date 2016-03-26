@@ -37,7 +37,8 @@
   ],
   "repository": "jshttp/forwarded",
   "dependencies": {
-    "debug-log": "^1.0.0"
+    "debug-log": "^1.0.0",
+    "forwarded-parse": "^1.0.1"
   },
   "devDependencies": {
     "istanbul": "0.4.2",
