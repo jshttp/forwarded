@@ -3,7 +3,7 @@
 'use strict'
 
 var assert = require('assert')
-var request = require('./helpers').createRequest
+var request = require('./helpers').createRequestServer
 
 describe('live server', function () {
   it('should get defaults', function (done) {

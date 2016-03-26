@@ -19,11 +19,10 @@ describe('rfc7239', function () {
   })
 
   it('should parse and process Forwarded header', function () {
-    var req = request({
-      'forwarded': 'host= mockbin.com, for=0.0.0.1, for=0.0.0.2, for=private, for=1::8, for=; port= 9000; proto=https; by=0.0.0.3'
-    })
+    var req = request({'forwarded': 'host= mockbin.com, for=0.0.0.1, for=0.0.0.2, for=private, for=1::8, for=; port= 9000; proto=https; by=0.0.0.3'})
+    var result = forwarded(req, options)
 
-    assert.deepEqual(forwarded(req, options), {
+    assert.deepEqual(result, {
       addrs: ['127.0.0.1', '1::8', 'private', '0.0.0.2', '0.0.0.1'],
       by: '0.0.0.3',
       port: '9000',

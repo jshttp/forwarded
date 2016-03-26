@@ -5,7 +5,6 @@
 var assert = require('assert')
 var forwarded = require('../..')
 var request = require('../helpers').createRequestMock
-var schemas = require('../../lib/schemas')
 
 var options = {
   schemas: ['x-forwarded']
@@ -13,50 +12,44 @@ var options = {
 
 describe('x-forwarded', function () {
   it('should parse [x-forwarded-for]', function () {
-    var result = forwarded(request({
-      'x-forwarded-for': '10.10.10.1'
-    }), options)
+    var req = request({'x-forwarded-for': '10.10.10.1'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.addrs, ['127.0.0.1', '10.10.10.1'])
   })
 
   it('should parse [x-forwarded-host]', function () {
-    var result = forwarded(request({
-      'x-forwarded-host': 'mockbin.com'
-    }), options)
+    var req = request({'x-forwarded-host': 'mockbin.com'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.host, 'mockbin.com')
   })
 
   it('should parse [x-forwarded-port]', function () {
-    var result = forwarded(request({
-      'x-forwarded-port': '9000'
-    }), options)
+    var req = request({'x-forwarded-port': '9000'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.port, '9000')
   })
 
   it('should parse [x-forwarded-proto]', function () {
-    var result = forwarded(request({
-      'x-forwarded-proto': 'https'
-    }), options)
+    var req = request({'x-forwarded-proto': 'https'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.proto, 'https')
   })
 
   it('should parse [x-forwarded-protocol]', function () {
-    var result = forwarded(request({
-      'x-forwarded-protocol': 'https'
-    }), options)
+    var req = request({'x-forwarded-protocol': 'https'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.proto, 'https')
   })
 
   it('should parse [x-forwarded-ssl]', function () {
-    var req = request({
-      'x-forwarded-ssl': 'on'
-    })
+    var req = request({'x-forwarded-ssl': 'on'})
+    var result = forwarded(req, options)
 
-    assert.ok(schemas['x-forwarded'].protoFn(req))
+    assert.deepEqual(result.proto, 'https')
   })
 })

@@ -13,32 +13,30 @@ var options = {
 
 describe('fastly', function () {
   it('should parse [fastly-client-ip]', function () {
-    var result = forwarded(request({
-      'fastly-client-ip': '10.10.10.1'
-    }), options)
+    var req = request({'fastly-client-ip': '10.10.10.1'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.addrs, ['127.0.0.1', '10.10.10.1'])
   })
 
   it('should parse [fastly-client-port]', function () {
-    var result = forwarded(request({
-      'fastly-client-port': '9000'
-    }), options)
+    var req = request({'fastly-client-port': '9000'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.port, '9000')
   })
 
-  it('should parse [fastly-ssl]', function () {
-    var req = request({
-      'fastly-ssl': '1'
-    })
+  it('should parse [fastly-ssl = 1]', function () {
+    var req = request({'fastly-ssl': '1'})
+    var result = schemas.fastly.proto(req.headers)
 
-    assert.ok(schemas.fastly.proto(req))
+    assert.equal(result, 'https')
+  })
 
-    req = request({
-      'fastly-ssl': undefined
-    })
+  it('should parse [fastly-ssl = undefined]', function () {
+    var req = request()
+    var result = schemas.fastly.proto(req.headers)
 
-    assert.ok(!schemas.fastly.proto(req))
+    assert.equal(result, undefined)
   })
 })

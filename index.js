@@ -12,7 +12,7 @@
  * @public
  */
 
-var Processor = require('./lib/processor')
+var processor = require('./lib/processor')
 var schemas = require('./lib/schemas')
 
 /**
@@ -33,9 +33,6 @@ module.exports = function forwarded (req, options) {
       'rfc7239'
     ]
   }
-
-  // consistent case
-  opts.schemas = opts.schemas.map(Function.prototype.call, String.prototype.toLowerCase)
 
   if (!req) {
     throw new TypeError('argument req is required')
@@ -62,6 +59,9 @@ module.exports = function forwarded (req, options) {
   return opts.schemas
     // check if schemas exist
     .map(function (name) {
+      // adjust case
+      name = name.toLowerCase()
+
       if (!schemas[name]) {
         throw new Error('invalid schema')
       }
@@ -71,7 +71,7 @@ module.exports = function forwarded (req, options) {
 
     // process schemas
     .reduce(function (forwarded, schema) {
-      var result = new Processor(req, schema)
+      var result = processor(req.headers, schema)
 
       // ensure reverse order of addresses
       if (result.addrs) {

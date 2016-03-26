@@ -13,44 +13,37 @@ var options = {
 
 describe('cloudflare', function () {
   it('should parse [cf-connecting-ip]', function () {
-    var result = forwarded(request({
-      'cf-connecting-ip': '10.10.10.1'
-    }), options)
+    var req = request({'cf-connecting-ip': '10.10.10.1'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.addrs, ['127.0.0.1', '10.10.10.1'])
   })
 
-  describe('should parse [cf-visitor]', function () {
-    it('{"scheme": "https"}', function () {
-      var req = request({
-        'cf-visitor': '{"scheme": "https"}'
-      })
+  it('should parse [cf-visitor = {"scheme": "https"}]', function () {
+    var req = request({'cf-visitor': '{"scheme": "https"}'})
+    var result = schemas.cloudflare.proto(req.headers)
 
-      assert.ok(schemas.cloudflare.proto(req))
-    })
+    assert.equal(result, 'https')
+  })
 
-    it('{"scheme": "http"}', function () {
-      var req = request({
-        'cf-visitor': '{"scheme": "http"}'
-      })
+  it('should parse [cf-visitor = {"scheme": "http"}]', function () {
+    var req = request({'cf-visitor': '{"scheme": "http"}'})
+    var result = schemas.cloudflare.proto(req.headers)
 
-      assert.ok(!schemas.cloudflare.proto(req))
-    })
+    assert.equal(result, 'http')
+  })
 
-    it('{}', function () {
-      var req = request({
-        'cf-visitor': '{}'
-      })
+  it('should parse [cf-visitor = {}]', function () {
+    var req = request({'cf-visitor': '{}'})
+    var result = schemas.cloudflare.proto(req.headers)
 
-      assert.ok(!schemas.cloudflare.proto(req))
-    })
+    assert.equal(result, undefined)
+  })
 
-    it('{}', function () {
-      var req = request({
-        'cf-visitor': '{malformed}'
-      })
+  it('should parse [cf-visitor = {malformed}]', function () {
+    var req = request({'cf-visitor': '{malformed}'})
+    var result = schemas.cloudflare.proto(req.headers)
 
-      assert.ok(!schemas.cloudflare.proto(req))
-    })
+    assert.equal(result, undefined)
   })
 })

@@ -12,33 +12,29 @@ var options = {
 
 describe('x-real', function () {
   it('should parse [x-real-ip]', function () {
-    var result = forwarded(request({
-      'x-real-ip': '10.10.10.1'
-    }), options)
+    var req = request({'x-real-ip': '10.10.10.1'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.addrs, ['127.0.0.1', '10.10.10.1'])
   })
 
   it('should parse [x-real-port]', function () {
-    var result = forwarded(request({
-      'x-real-port': '9000'
-    }), options)
+    var req = request({'x-real-port': '9000'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.port, '9000')
   })
 
   it('should parse [x-real-proto]', function () {
-    var result = forwarded(request({
-      'x-real-proto': 'https'
-    }), options)
+    var req = request({'x-real-proto': 'https'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.proto, 'https')
   })
 
   it('should parse [x-url-scheme]', function () {
-    var result = forwarded(request({
-      'x-url-scheme': 'https'
-    }), options)
+    var req = request({'x-url-scheme': 'https'})
+    var result = forwarded(req, options)
 
     assert.deepEqual(result.proto, 'https')
   })

@@ -14,9 +14,8 @@ var createServer = function (done) {
   })
 }
 
-exports.createRequest = function (headers, done) {
+exports.createRequestServer = function (headers, done) {
   createServer(function (server) {
-
     var options = {
       headers: headers,
       host: server.address().address,
@@ -24,7 +23,6 @@ exports.createRequest = function (headers, done) {
     }
 
     http.get(options, function (res) {
-
       var body = ''
 
       res.on('data', function (chunk) {
