@@ -7,10 +7,10 @@ var forwarded = require('../..')
 var request = require('../helpers').createRequestMock
 
 var options = {
-  schemas: ['zscaler']
+  schemas: ['z-forwarded']
 }
 
-describe('zscaler', function () {
+describe('z-forwarded', function () {
   it('should parse [z-forwarded-for]', function () {
     var result = forwarded(request({
       'z-forwarded-for': '10.10.10.1'

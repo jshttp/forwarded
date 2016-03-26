@@ -7,10 +7,10 @@ var forwarded = require('../..')
 var request = require('../helpers').createRequestMock
 
 var options = {
-  schemas: ['nginx']
+  schemas: ['x-real']
 }
 
-describe('nginx', function () {
+describe('x-real', function () {
   it('should parse [x-real-ip]', function () {
     var result = forwarded(request({
       'x-real-ip': '10.10.10.1'

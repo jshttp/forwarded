@@ -8,10 +8,10 @@ var request = require('../helpers').createRequestMock
 var schemas = require('../../lib/schemas')
 
 var options = {
-  schemas: ['xff']
+  schemas: ['x-forwarded']
 }
 
-describe('xff', function () {
+describe('x-forwarded', function () {
   it('should parse [x-forwarded-for]', function () {
     var result = forwarded(request({
       'x-forwarded-for': '10.10.10.1'
@@ -57,6 +57,6 @@ describe('xff', function () {
       'x-forwarded-ssl': 'on'
     })
 
-    assert.ok(schemas.xff.protoFn(req))
+    assert.ok(schemas['x-forwarded'].protoFn(req))
   })
 })

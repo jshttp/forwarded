@@ -7,10 +7,10 @@ var forwarded = require('../..')
 var request = require('../helpers').createRequestMock
 
 var options = {
-  schemas: ['rackspace']
+  schemas: ['x-cluster']
 }
 
-describe('rackspace', function () {
+describe('x-cluster', function () {
   it('should parse [x-cluster-client-ip]', function () {
     var result = forwarded(request({
       'x-cluster-client-ip': '10.10.10.1'

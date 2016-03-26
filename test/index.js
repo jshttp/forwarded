@@ -32,7 +32,7 @@ describe('forwarded(req)', function () {
   it('should convert schema names to lowercase', function () {
     var options = {
       schemas: [
-        'XFF'
+        'x-forwarded'
       ]
     }
 
@@ -77,10 +77,10 @@ describe('forwarded(req)', function () {
         'cloudflare',
         'fastly',
         'microsoft',
-        'nginx',
-        'rackspace',
-        'xff',
-        'zscaler',
+        'x-real',
+        'x-cluster',
+        'x-forwarded',
+        'z-forwarded',
         'rfc7239'
       ]
     }
