@@ -37,11 +37,11 @@
   ],
   "repository": "jshttp/forwarded",
   "dependencies": {
-    "debug": "~2.2.0"
+    "debug-log": "^1.0.0"
   },
   "devDependencies": {
-    "istanbul": "0.3.9",
-    "mocha": "1.21.5"
+    "istanbul": "0.4.2",
+    "mocha": "2.4.5"
   },
   "files": [
     "LICENSE",
