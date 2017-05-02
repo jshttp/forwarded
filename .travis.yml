@@ -21,4 +21,4 @@ script:
   - "test ! -z $(npm -ps ls istanbul) || npm test"
   - "test   -z $(npm -ps ls istanbul) || npm run-script test-travis"
 after_script:
-  - "test $TRAVIS_NODE_VERSION != '0.6' && npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
+  - "test -e ./coverage/lcov.info && npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
