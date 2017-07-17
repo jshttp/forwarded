@@ -7,6 +7,13 @@
 'use strict'
 
 /**
+ * Simple expression to split token list.
+ * @private
+ */
+
+var TOKEN_LIST_REGEXP = / *, */
+
+/**
  * Module exports.
  * @public
  */
@@ -28,7 +35,7 @@ function forwarded (req) {
 
   // simple header parsing
   var proxyAddrs = (req.headers['x-forwarded-for'] || '')
-    .split(/ *, */)
+    .split(TOKEN_LIST_REGEXP)
     .filter(Boolean)
     .reverse()
   var socketAddr = req.connection.remoteAddress
