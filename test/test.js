@@ -28,11 +28,11 @@ describe('forwarded(req)', function () {
   })
 })
 
-function createReq(socketAddr, headers) {
+function createReq (socketAddr, headers) {
   return {
     connection: {
       remoteAddress: socketAddr
     },
     headers: headers || {}
-  };
+  }
 }

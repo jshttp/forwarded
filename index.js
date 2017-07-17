@@ -21,7 +21,7 @@ module.exports = forwarded
  * @public
  */
 
-function forwarded(req) {
+function forwarded (req) {
   if (!req) {
     throw new TypeError('argument req is required')
   }
