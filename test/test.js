@@ -26,6 +26,13 @@ describe('forwarded(req)', function () {
     })
     assert.deepEqual(forwarded(req), ['127.0.0.1', '10.0.0.1', '10.0.0.2'])
   })
+
+  it('should trim leading OWS', function () {
+    var req = createReq('127.0.0.1', {
+      'x-forwarded-for': ' 10.0.0.2 ,  , 10.0.0.1 '
+    })
+    assert.deepEqual(forwarded(req), ['127.0.0.1', '10.0.0.1', '10.0.0.2'])
+  })
 })
 
 function createReq (socketAddr, headers) {

@@ -35,6 +35,7 @@ function forwarded (req) {
 
   // simple header parsing
   var proxyAddrs = (req.headers['x-forwarded-for'] || '')
+    .trim()
     .split(TOKEN_LIST_REGEXP)
     .filter(Boolean)
     .reverse()
