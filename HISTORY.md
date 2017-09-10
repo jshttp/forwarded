@@ -1,5 +1,5 @@
-unreleased
-==========
+0.1.1 / 2017-09-10
+==================
 
   * Fix trimming leading / trailing OWS
   * perf: hoist regular expression
