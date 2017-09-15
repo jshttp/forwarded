@@ -1,3 +1,8 @@
+unreleased
+==========
+
+  * perf: reduce overhead when no `X-Forwarded-For` header
+
 0.1.1 / 2017-09-10
 ==================
 
