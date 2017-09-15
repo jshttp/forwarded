@@ -1,5 +1,5 @@
-unreleased
-==========
+0.1.2 / 2017-09-14
+==================
 
   * perf: improve header parsing
   * perf: reduce overhead when no `X-Forwarded-For` header
