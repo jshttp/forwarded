@@ -48,7 +48,7 @@ $ npm test
 [npm-image]: https://img.shields.io/npm/v/forwarded.svg
 [npm-url]: https://npmjs.org/package/forwarded
 [node-version-image]: https://img.shields.io/node/v/forwarded.svg
-[node-version-url]: http://nodejs.org/download/
+[node-version-url]: https://nodejs.org/en/download/
 [travis-image]: https://img.shields.io/travis/jshttp/forwarded/master.svg
 [travis-url]: https://travis-ci.org/jshttp/forwarded
 [coveralls-image]: https://img.shields.io/coveralls/jshttp/forwarded/master.svg
