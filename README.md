@@ -31,7 +31,7 @@ var addresses = forwarded(req)
 ```
 
 Parse the `X-Forwarded-For` header from the request. Returns an array
-of the addresses, including the socket address for the `req`. In reverse
+of the addresses, including the socket address for the `req`, in reverse
 order (i.e. index `0` is the socket address and the last index is the
 furthest address, typically the end-user).
 
