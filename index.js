@@ -27,7 +27,7 @@ function forwarded (req) {
   }
 
   // simple header parsing
-  var proxyAddrs = parse(req.headers['x-forwarded-for'] || '')
+  var proxyAddrs = parse(req.headers['x-forwarded-for'] || req.headers['X-Forwarded-For'] || '')
   var socketAddr = req.connection.remoteAddress
   var addrs = [socketAddr].concat(proxyAddrs)
 
