@@ -37,7 +37,7 @@ describe('forwarded(req)', function () {
 
 function createReq (socketAddr, headers) {
   return {
-    connection: {
+    socket: {
       remoteAddress: socketAddr
     },
     headers: headers || {}
