@@ -16,7 +16,7 @@
     "beautify-benchmark": "0.2.4",
     "benchmark": "2.1.4",
     "deep-equal": "1.0.1",
-    "eslint": "7.13.0",
+    "eslint": "7.17.0",
     "eslint-config-standard": "14.1.1",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "10.0.0",
