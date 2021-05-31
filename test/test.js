@@ -9,7 +9,7 @@ describe('forwarded(req)', function () {
     assert.throws(forwarded.bind(null), /argument req.*required/)
   })
 
-  it('should work with X-Forwarded-For header', function () {
+  it('should work without X-Forwarded-For header', function () {
     var req = createReq('127.0.0.1')
     assert.ok(deepEqual(forwarded(req), ['127.0.0.1']))
   })
