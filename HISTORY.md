@@ -1,3 +1,8 @@
+unreleased
+==========
+
+  * Use `req.socket` over deprecated `req.connection`
+
 0.1.2 / 2017-09-14
 ==================
 

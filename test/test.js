@@ -9,7 +9,7 @@ describe('forwarded(req)', function () {
     assert.throws(forwarded.bind(null), /argument req.*required/)
   })
 
-  it('should work without X-Forwarded-For header', function () {
+  it('should work with X-Forwarded-For header', function () {
     var req = createReq('127.0.0.1')
     assert.ok(deepEqual(forwarded(req), ['127.0.0.1']))
   })
@@ -34,11 +34,36 @@ describe('forwarded(req)', function () {
     })
     assert.ok(deepEqual(forwarded(req), ['127.0.0.1', '10.0.0.1', '10.0.0.2']))
   })
+
+  describe('socket address', function () {
+    it('should begin with socket address', function () {
+      var req = createReq('127.0.0.1')
+      assert.strictEqual(forwarded(req)[0], '127.0.0.1')
+    })
+
+    it('should use address from req.socket', function () {
+      var req = createReq('127.0.0.1')
+      assert.strictEqual(forwarded(req)[0], req.socket.remoteAddress)
+    })
+
+    it('should prefer req.socket', function () {
+      var req = createReq('127.0.0.1')
+      req.connection = { remoteAddress: '10.0.0.1' }
+      assert.strictEqual(forwarded(req)[0], '127.0.0.1')
+    })
+
+    it('should use fall back to req.connection', function () {
+      var req = createReq('127.0.0.1')
+      req.connection = { remoteAddress: '10.0.0.1' }
+      req.socket = undefined
+      assert.strictEqual(forwarded(req)[0], '10.0.0.1')
+    })
+  })
 })
 
 function createReq (socketAddr, headers) {
   return {
-    connection: {
+    socket: {
       remoteAddress: socketAddr
     },
     headers: headers || {}
