@@ -1,5 +1,5 @@
-unreleased
-==========
+0.2.0 / 2021-05-31
+==================
 
   * Use `req.socket` over deprecated `req.connection`
 
