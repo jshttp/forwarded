@@ -22,8 +22,8 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-standard": "4.1.0",
-    "istanbul": "0.4.5",
-    "mocha": "8.4.0"
+    "mocha": "8.4.0",
+    "nyc": "15.1.0"
   },
   "files": [
     "LICENSE",
@@ -38,7 +38,7 @@
     "bench": "node benchmark/index.js",
     "lint": "eslint .",
     "test": "mocha --reporter spec --bail --check-leaks test/",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
-    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
+    "test-ci": "nyc --reporter=lcov --reporter=text npm test",
+    "test-cov": "nyc --reporter=html --reporter=text npm test"
   }
 }

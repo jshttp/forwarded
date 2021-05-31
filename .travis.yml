@@ -37,12 +37,6 @@ before_install:
     npm rm --save-dev beautify-benchmark
   # Setup Node.js version-specific dependencies
   - |
-    # istanbul for coverage
-    # - remove on Node.js < 0.10
-    if [[ "$(cut -d. -f1 <<< "$TRAVIS_NODE_VERSION")" -eq 0 && "$(cut -d. -f2 <<< "$TRAVIS_NODE_VERSION")" -lt 10 ]]; then
-      npm rm --silent --save-dev istanbul
-    fi
-  - |
     # eslint for linting
     # - remove on Node.js < 10
     if [[ "$(cut -d. -f1 <<< "$TRAVIS_NODE_VERSION")" -lt 10 ]]; then
@@ -64,6 +58,17 @@ before_install:
     elif [[ "$(cut -d. -f1 <<< "$TRAVIS_NODE_VERSION")" -lt 10 ]]; then
       npm install --save-dev mocha@7.2.0
     fi
+  - |
+    # nyc for coverage
+    if [[ "$(cut -d. -f1 <<< "$TRAVIS_NODE_VERSION")" -eq 0 && "$(cut -d. -f2 <<< "$TRAVIS_NODE_VERSION")" -lt 10 ]]; then
+      npm rm --silent --save-dev nyc
+    elif [[ "$(cut -d. -f1 <<< "$TRAVIS_NODE_VERSION")" -lt 4 ]]; then
+      npm install --save-dev nyc@10.3.2
+    elif [[ "$(cut -d. -f1 <<< "$TRAVIS_NODE_VERSION")" -lt 6 ]]; then
+      npm install --save-dev nyc@11.9.0
+    elif [[ "$(cut -d. -f1 <<< "$TRAVIS_NODE_VERSION")" -lt 8 ]]; then
+      npm install --save-dev nyc@14.1.1
+    fi
   # Update Node.js modules
   - |
     # Prune and rebuild node_modules
@@ -73,9 +78,9 @@ before_install:
     fi
 script:
   - |
-    # Run test script, depending on istanbul install
-    if npm -ps ls istanbul | grep -q istanbul; then
-      npm run-script test-travis
+    # Run test script, depending on nyc install
+    if npm -ps ls nyc | grep -q nyc; then
+      npm run-script test-ci
     else
       npm test
     fi
