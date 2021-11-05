@@ -114,7 +114,7 @@ jobs:
           npm-rm: beautify-benchmark benchmark
 
         - name: Node.js 14.x
-          node-version: "14.17"
+          node-version: "14.18"
           npm-rm: beautify-benchmark benchmark
 
         - name: Node.js 15.x
