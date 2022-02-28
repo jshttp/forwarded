@@ -30,6 +30,7 @@ jobs:
         - Node.js 14.x
         - Node.js 15.x
         - Node.js 16.x
+        - Node.js 17.x
 
         include:
         - name: Node.js 0.6
@@ -125,6 +126,10 @@ jobs:
 
         - name: Node.js 16.x
           node-version: "16.13"
+          npm-rm: beautify-benchmark benchmark
+
+        - name: Node.js 17.x
+          node-version: "17.6"
           npm-rm: beautify-benchmark benchmark
 
     steps:
