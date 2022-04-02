@@ -30,10 +30,10 @@ var forwarded = require('forwarded')
 var addresses = forwarded(req)
 ```
 
-Parse the `X-Forwarded-For` header from the request. Returns an array
-of the addresses, including the socket address for the `req`, in reverse
-order (i.e. index `0` is the socket address and the last index is the
-furthest address, typically the end-user).
+Parse the `X-Forwarded-For` header from the given [Node.js `IncomingMessage` object][nodejs-http-incomingmessage].
+Returns an array of the addresses, including the socket address for the `req`, in reverse
+order (i.e. index `0` is the socket address and the last index is the furthest address,
+typically the end-user).
 
 ## Testing
 
@@ -44,6 +44,8 @@ $ npm test
 ## License
 
 [MIT](LICENSE)
+
+[nodejs-http-incomingmessage]: https://nodejs.org/dist/latest/docs/api/http.html#class-httpincomingmessage
 
 [ci-image]: https://badgen.net/github/checks/jshttp/forwarded/master?label=ci
 [ci-url]: https://github.com/jshttp/forwarded/actions?query=workflow%3Aci
