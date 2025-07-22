@@ -12,6 +12,10 @@
     "req"
   ],
   "repository": "jshttp/forwarded",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/express"
+  },
   "devDependencies": {
     "beautify-benchmark": "0.2.4",
     "benchmark": "2.1.4",
