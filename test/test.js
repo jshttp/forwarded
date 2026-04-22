@@ -58,6 +58,18 @@ describe('forwarded(req)', function () {
       var req = createReq('connection', '10.0.0.1')
       assert.strictEqual(forwarded(req)[0], '10.0.0.1')
     })
+
+    it('should omit socket address when socket is disconnected', function () {
+      var req = { headers: {}, socket: { remoteAddress: undefined } }
+      var addrs = forwarded(req)
+      assert.strictEqual(addrs.indexOf(undefined), -1)
+    })
+
+    it('should omit socket address when both socket and connection are absent', function () {
+      var req = { headers: {} }
+      var addrs = forwarded(req)
+      assert.strictEqual(addrs.indexOf(undefined), -1)
+    })
   })
 })
 

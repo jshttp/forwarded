@@ -29,7 +29,7 @@ function forwarded (req) {
   // simple header parsing
   var proxyAddrs = parse(req.headers['x-forwarded-for'] || '')
   var socketAddr = getSocketAddr(req)
-  var addrs = [socketAddr].concat(proxyAddrs)
+  var addrs = (socketAddr ? [socketAddr] : []).concat(proxyAddrs)
 
   // return all addresses
   return addrs
@@ -44,9 +44,8 @@ function forwarded (req) {
  */
 
 function getSocketAddr (req) {
-  return req.socket
-    ? req.socket.remoteAddress
-    : req.connection.remoteAddress
+  var socket = req.socket || req.connection
+  return socket ? socket.remoteAddress : undefined
 }
 
 /**
