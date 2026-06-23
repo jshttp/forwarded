@@ -37,6 +37,13 @@ describe('forwarded(req)', function () {
       .expect(200, ['127.0.0.1', '10.0.0.1', '10.0.0.2'], done)
   })
 
+  it('should trim HTAB OWS', function (done) {
+    request(createServer())
+      .get('/')
+      .set('X-Forwarded-For', '\t10.0.0.2\t,\t10.0.0.1\t')
+      .expect(200, ['127.0.0.1', '10.0.0.1', '10.0.0.2'], done)
+  })
+
   describe('socket address', function () {
     it('should begin with socket address', function () {
       var req = createReq('socket', '127.0.0.1')
