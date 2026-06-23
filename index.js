@@ -65,6 +65,7 @@ function parse (header) {
   for (var i = header.length - 1; i >= 0; i--) {
     switch (header.charCodeAt(i)) {
       case 0x20: /*   */
+      case 0x09: /* \t */
         if (start === end) {
           start = end = i
         }
